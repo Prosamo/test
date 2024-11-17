@@ -1,15 +1,19 @@
 import pyxel
+
 class App:
     def __init__(self):
-        pyxel.init(256, 256, title="テスト")
+        pyxel.init(160, 120)
+        self.x = 0
         pyxel.run(self.update, self.draw)
-    
+
     def update(self):
-        pass
+        # キーボードのEnterキーをゲームパッドのAボタンに置き換え
+        if pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
+            self.x = (self.x + 1) % pyxel.width
 
     def draw(self):
-        pyxel.cls(7)
-        pyxel.elli(128, 32, 64, 96, 8)
+        pyxel.cls(0)
+        pyxel.rect(self.x, 50, 8, 8, 11)
         
 if __name__ == "__main__":
     App()
